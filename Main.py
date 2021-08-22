@@ -7,9 +7,9 @@ from PIL import ImageTk, Image
 
 etape = 0.135
 sum_win = 0
+check_win = 0
 mots_placé = 0
 verif_cond = False
-check_win = 0
 
 grandeur_grille = 13
 
@@ -24,9 +24,6 @@ root.maxsize(width=1550, height=800)
 my_pic = Image.open("photo-1579546929662-711aa81148cf.png")
 
 
-
-
-
 def partie(taille_grille, nombre_mots, check_frame):
     check_frame.grid(row=0, column=0, sticky="nsew")
     check_frame.tkraise()
@@ -35,7 +32,6 @@ def partie(taille_grille, nombre_mots, check_frame):
     inter = []
     final = []
     hidden = []
-    global check_win
     global verif_cond
     global pi
     police = font.Font(family="Roboto Black", size=11)
@@ -87,7 +83,6 @@ def partie(taille_grille, nombre_mots, check_frame):
 
     oui = Label(window, image=new_pic)
     oui.place(relx=0, rely=0, relwidth=1)
-
 
     # definir position mot, possibilité d'écriture et écriture
     def position_mot(mot, block=0):
@@ -264,22 +259,20 @@ def partie(taille_grille, nombre_mots, check_frame):
 
     def check_ASCII():
 
-        restart.place(relx=0.812, rely=0.5)
         if check_win == sum_win:
             pas_fini.place_forget()
             button_win.place(relx=0.798, rely=0.43)
+
+
         else:
             button_win.place_forget()
             pas_fini.place(relx=0.7715, rely=0.43)
 
-
+        restart.place(relx=0.812, rely=0.5)
 
     def recommencer():
 
         start_frame.tkraise()
-
-
-
 
     # défini grille 2D en remplissant de 0
 
@@ -312,7 +305,6 @@ def partie(taille_grille, nombre_mots, check_frame):
                 grille_2D[index][i] = Lettres_remplissage
                 crea_boutons(index, i, Lettres_remplissage)
 
-
     largeur = 15
 
     if len(final) >= 10:
@@ -327,7 +319,6 @@ def partie(taille_grille, nombre_mots, check_frame):
     Cadre_revel = Frame(window, bg="#FFE0FC", height=400, width=180, highlightthickness=2, highlightbackground='black')
     Cadre_revel.place(relx=0.08, rely=0.25)
 
-
     for a in range(0, len(final)):
         mot_list = Label(Cadre_revel, text=final[a], bg="#FFE0FC", font=police, justify='right')
         hidden.append(mot_list)
@@ -340,7 +331,8 @@ def partie(taille_grille, nombre_mots, check_frame):
     button1.pack()
 
     # boutons affichés si check_button est pressé
-    pas_fini = Label(window, text="Il te reste des mots à trouver", font=police_button1, padx=15, pady=5, relief="solid")
+    pas_fini = Label(window, text="Il te reste des mots à trouver", font=police_button1, padx=15, pady=5,
+                     relief="solid")
     button_win = Label(window, text="Bravo tu as réussi !", font=police_button1, padx=15, pady=5, relief="solid")
     restart = Button(window, text="Recommencer", font=police_check, relief="solid", command=recommencer)
 
@@ -352,12 +344,12 @@ def partie(taille_grille, nombre_mots, check_frame):
     check_button.pack()
 
     # Label indiquant la taille de la grille
-    label_grille = Label(window, text=f"Grille de {taille_grille} x {taille_grille}", bg="#F0F3F4", font=police2, borderwidth=2,
+    label_grille = Label(window, text=f"Grille de {taille_grille} x {taille_grille}", bg="#F0F3F4", font=police2,
+                         borderwidth=2,
                          relief="solid", padx=10, pady=5)
     label_grille.grid(row=25, column=50)
 
     # print(mots_placé)
-
 
 
 root.columnconfigure(0, weight=1)
@@ -366,11 +358,7 @@ start_frame = Frame(root)
 
 window = Frame(root)
 
-
-
 start_frame.grid(row=0, column=0, sticky="nsew")
-
-
 
 police_start = font.Font(weight="bold", size=22)
 police_titre = font.Font(weight="bold", size=35)
@@ -383,30 +371,29 @@ non.place(relx=0, rely=0, relwidth=1)
 border_titre = Label(start_frame, bg="black", width=41, height=5, relief="flat", padx=31, pady=5)
 border_titre.place(relx=0.38983, rely=0.096)
 
-label_desc = Label(start_frame, text="Choisissez le nombre de mots", font=police_start, relief="solid", padx=30, pady=9, borderwidth=3)
+label_desc = Label(start_frame, text="Choisissez le nombre de mots", font=police_start, relief="solid", padx=30, pady=9,
+                   borderwidth=3)
 label_desc.place(relx=0.343, rely=0.18)
 
 label_titre = Label(start_frame, text="Mots cachés", font=police_titre, relief="flat", padx=30, pady=5)
 label_titre.place(relx=0.393, rely=0.1)
 
-
-
-
 border_startbutton = Frame(root)
 
-mots_button = Button(start_frame, text="6 mots", font=police_start, relief="solid", borderwidth=3, padx=5, command=lambda: partie(grandeur_grille, 6, window))
-mots_button2 = Button(start_frame, text="7 mots", font=police_start, relief="solid", borderwidth=3, padx=5, command=lambda: partie(grandeur_grille, 7, window))
-mots_button3 = Button(start_frame, text="8 mots", font=police_start, relief="solid", borderwidth=3, padx=5, command=lambda: partie(grandeur_grille, 8, window))
-mots_button4 = Button(start_frame, text="9 mots", font=police_start, relief="solid", borderwidth=3, padx=5, command=lambda: partie(grandeur_grille, 9, window))
-mots_button5 = Button(start_frame, text="10 mots", font=police_start, relief="solid", borderwidth=3, padx=5, command=lambda: partie(grandeur_grille, 10, window))
+mots_button = Button(start_frame, text="6 mots", font=police_start, relief="solid", borderwidth=3, padx=5,
+                     command=lambda: partie(grandeur_grille, 6, window))
+mots_button2 = Button(start_frame, text="7 mots", font=police_start, relief="solid", borderwidth=3, padx=5,
+                      command=lambda: partie(grandeur_grille, 7, window))
+mots_button3 = Button(start_frame, text="8 mots", font=police_start, relief="solid", borderwidth=3, padx=5,
+                      command=lambda: partie(grandeur_grille, 8, window))
+mots_button4 = Button(start_frame, text="9 mots", font=police_start, relief="solid", borderwidth=3, padx=5,
+                      command=lambda: partie(grandeur_grille, 9, window))
+mots_button5 = Button(start_frame, text="10 mots", font=police_start, relief="solid", borderwidth=3, padx=5,
+                      command=lambda: partie(grandeur_grille, 10, window))
 
 increase = 0.169
 for bouton in (mots_button, mots_button2, mots_button3, mots_button4, mots_button5):
-
     bouton.place(relx=increase, rely=0.45)
     increase += 0.15
-
-
-
 
 root.mainloop()
