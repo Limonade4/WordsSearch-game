@@ -7,9 +7,9 @@ from PIL import ImageTk, Image
 
 etape = 0.135
 sum_win = 0
-check_win = 0
 mots_placé = 0
 verif_cond = False
+check_win = 0
 
 grandeur_grille = 13
 
@@ -35,6 +35,7 @@ def partie(taille_grille, nombre_mots, check_frame):
     inter = []
     final = []
     hidden = []
+    global check_win
     global verif_cond
     global pi
     police = font.Font(family="Roboto Black", size=11)
@@ -263,15 +264,15 @@ def partie(taille_grille, nombre_mots, check_frame):
 
     def check_ASCII():
 
+        restart.place(relx=0.812, rely=0.5)
         if check_win == sum_win:
             pas_fini.place_forget()
             button_win.place(relx=0.798, rely=0.43)
-
-
         else:
             button_win.place_forget()
             pas_fini.place(relx=0.7715, rely=0.43)
-            restart.place(relx=0.812, rely=0.5)
+
+
 
     def recommencer():
 
@@ -356,9 +357,6 @@ def partie(taille_grille, nombre_mots, check_frame):
     label_grille.grid(row=25, column=50)
 
     # print(mots_placé)
-
-
-
 
 
 
